@@ -30,3 +30,4 @@ res = llm(prompt, **generation_kwargs)  # Res is a dictionary
 
 # Print the generated text
 print(res["choices"][0]["text"])  # res is short for result
+
