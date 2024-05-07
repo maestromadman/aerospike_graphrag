@@ -1,2 +1,3 @@
 *.gguf
 *.graphml
+.venv

@@ -41,8 +41,8 @@ print(schema_summary)
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # Initialize the tokenizer and the model
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf")
-model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf")
+tokenizer = AutoTokenizer.from_pretrained("llama-2-7b-chat.Q4_0.gguf")
+model = AutoModelForCausalLM.from_pretrained("llama-2-7b-chat.Q4_0.gguf")
 
 #Prompt creation
 prompt = print("Please ask a question about air routes you are interested in.")

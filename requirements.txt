@@ -2,3 +2,5 @@ llama_cpp_python
 pygraphml
 torch
 accelerate
+gremlinpython
+transformers
