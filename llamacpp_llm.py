@@ -22,7 +22,7 @@ if __name__ == '__main__':
     vertex_props = summary.get('Vertex properties by label', {}).get('airport', {}) # <type 'dict'>
     vertex_props_str = " ".join(vertex_props)
 
-    schema_context = f'Only use these edge properties: ({edge_props_str}\n) and these vertex properties: ({vertex_props_str}) to create a Gremlin query for my air-routes graph.'
+    schema_context = f'Create a Gremlin query (NOT a Cypher query) to find the answer to this question. Only use these edge properties ({edge_props_str}\n) and these vertex properties ({vertex_props_str}) in the Gremlin query.'
 
 
 #---------------------------------------------------------------
@@ -51,7 +51,7 @@ generation_kwargs = {
 }
 
 # Specify the prompt
-question = print("Let me help you create a Gremlin query for your graph.")
+question = print("Ask me a question about your graph.")
 user_query = input()
 prompt = user_query + schema_context
 
