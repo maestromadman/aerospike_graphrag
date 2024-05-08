@@ -1,4 +1,4 @@
-# Aerospike Graph Rag
+# Aerospike Graph Rag (in progress...)
 This demo uses Aerospike's Graph Database for RAG with an LLM. 
 As of **May 8, 2024**, this project is not complete, but Gremlin queries can be generated using the air-routes-smallest.graphml dataset and the Llama-2-7B-Chat model. I will get this set up as a chat bot and then swap out this dataset with a more meaningful, large-scale graph used by Aerospike's Graph team. 
 
