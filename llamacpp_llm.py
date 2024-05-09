@@ -12,7 +12,7 @@ if __name__ == '__main__':
     #   io("/opt/aerospike-graph/data/air-routes-small.graphml").\
     #   with_(IO.reader, IO.graphml).\
     #   read().iterate()                                                                                              
-
+    
     summary = g.call("summary").next()
 
     edges = {k: v for k, v in summary.items() if k in {'Edge properties by label'}} # <type 'dict'>
@@ -21,39 +21,41 @@ if __name__ == '__main__':
 
     vertex_props = summary.get('Vertex properties by label', {}).get('airport', {}) # <type 'dict'>
     vertex_props_str = " ".join(vertex_props)
+    
+    sample_queries = "Find the number of airports in this graph: g.V().has('code','DFW')\n Find the number of flights going out of the airport SFO: g.V().hasLabel('airport').count()\n Get all cities with flights that are >4000 miles: g.V().has('code','SFO').outE().count()\n Find all the airports in the USA you can fly to from London Heathrow (LHR): g.V().has('dist', P.gt(4000L)).inV().values('city').dedup()\n g.V().has('code','LHR').out('route').has('country','US').values('code')\n Find all the unique locations in the world and in the US that I can get to from SFO through a 2 hop flight: g.V().has('code', 'SFO').out().out().dedup().fold().project('totalAirportCountFromSFO', 'USAirportCountFromSFO').by(__.unfold().count()).by(__.unfold().has('country', 'US').count())"
+    schema_context = '''\
+        Here are some example questions and the Gremlin queries that help answer them: {sample_queries}.
+        Given these edge properties ({edge_props}) and vertex properties ({vertex_props}), create a Gremlin query to answer my question.
 
-    schema_context = f'Create a Gremlin query (NOT Cypher) to find the answer to this question in a graph. Only use these edge properties ({edge_props_str}\n) and these vertex properties ({vertex_props_str}) to create the Gremlin query.'
-
-
-#---------------------------------------------------------------
-
-# LLM 
+        Question: {question}
+        '''
+    
 
 from llama_cpp import Llama
 
 # Specify the path to your local model file
 model_path = "./llama-2-7b-chat.Q4_0.gguf"
-
 # Initialize the Llama model
 llm = Llama(
     model_path=model_path,
     n_ctx=0,  # Context length to use
     n_threads=16,  # Number of CPU threads to use
-    n_gpu_layers=0  # Number of model layers to offload to GPU
+    n_gpu_layers=0,  # Number of model layers to offload to GPU
+    chat_format=""
 )
 
 # Set the generation parameters
 generation_kwargs = {
-    "max_tokens":300,
+    "max_tokens":400,
     "stop":["</s>"],
     "echo":False,  # Echo the prompt in the output
     "top_k":1  # This is essentially greedy decoding, since the model will always return the highest-probability token. Set this value > 1 for sampling decoding
 }
 
 # Specify the prompt
-question = print("Ask me a question about your graph.")
+print("Ask me a question about the air routes. I will only provide a Gremlin query.")
 user_query = input()
-prompt = user_query + schema_context
+prompt = schema_context.format(edge_props=edge_props_str, vertex_props=vertex_props_str, sample_queries=sample_queries, question=user_query)
 
 # Generate the text
 res = llm(prompt, **generation_kwargs)  # Res is a dictionary
