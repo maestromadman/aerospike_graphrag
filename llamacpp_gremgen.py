@@ -48,7 +48,7 @@ llm = Llama(
 
 # Set the generation parameters
 generation_kwargs = {
-    "max_tokens":375,
+    "max_tokens":350,
     "stop":["</s>"],
     "echo":False,  # Echo the prompt in the output
     "top_k":1  # This is essentially greedy decoding, since the model will always return the highest-probability token. Set this value > 1 for sampling decoding
