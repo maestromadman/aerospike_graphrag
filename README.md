@@ -29,7 +29,7 @@ pip install -r requirements.txt
 ```
 
 ## Running
-Navigate to the `llamacpp_gremgen.py` and run the file. You should see some LLM configuration text pop up, in addition to a prompt. Try asking something like "Find all outbound flights from Austin." You should get a Gremlin query in response. Once this demo is fully developed, this will be fed to Aerospike Graph to get a result, and this in turn will be sent back to the LLM to generate a natural language response.
+Navigate to `llamacpp_gremgen.py` and run the file. You should see some LLM configuration text pop up, in addition to a prompt. Try asking something like "Find all outbound flights from Austin." You should get a Gremlin query in response. Once this demo is fully developed, this will be fed to Aerospike Graph to get a result, and this in turn will be sent back to the LLM to generate a natural language response.
 
 
 
