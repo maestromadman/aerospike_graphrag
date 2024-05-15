@@ -60,8 +60,8 @@ user_query = input()
 prompt = schema_context.format(edge_props=edge_props_str, vertex_props=vertex_props_str, sample_queries=sample_queries, question=user_query)
 
 # Generate the text
-res = llm(prompt, **generation_kwargs)  # Res is a dictionary
+res1 = llm(prompt, **generation_kwargs)  # Res is a dictionary
 
 # Print the generated text
-print(res["choices"][0]["text"])  # res is short for result
+print(res1["choices"][0]["text"])  # res is short for result
 
