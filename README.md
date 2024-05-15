@@ -13,7 +13,7 @@ In your CLI, run the following:
 ```
 pip install huggingface_hub
 hf user login #you may need to use an authentication token from your HuggingFace profile
-hf hub download --model TheBloke/llama-2-7b-chat.Q4_0.gguf
+hf hub download --model TheBloke/mistral-7b-instruct-v0.1.Q5_K_S.gguf
 ```
 The model is now downloaded in this repo's local folder on your machine!
 
