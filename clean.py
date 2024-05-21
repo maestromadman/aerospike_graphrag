@@ -10,7 +10,8 @@ def clean_grem():
             n_ctx=0,  # Context length to use
             n_threads=16,  # Number of CPU threads to use
             n_gpu_layers=33,  # Number of model layers to offload to GPU
-            chat_format=""
+            chat_format="",
+            verbose=False
         )
     
     # Set the generation parameters
@@ -35,6 +36,9 @@ def clean_grem():
     end = output.rfind(")") + 1
     gremlin_query = output[start:end]
     return gremlin_query
+
+out = clean_grem()
+print(out)
 
 
 

@@ -42,7 +42,8 @@ def schem_summ():
             n_ctx=0,  # Context length to use
             n_threads=16,  # Number of CPU threads to use
             n_gpu_layers=33,  # Number of model layers to offload to GPU
-            chat_format=""
+            chat_format="",
+            verbose=False
         )
 
     # Set the generation parameters
@@ -64,3 +65,5 @@ def schem_summ():
     # Print the generated text
     return res1["choices"][0]["text"]  # res is short for result
 
+oout = schem_summ()
+print(oout)
