@@ -65,5 +65,3 @@ def schem_summ():
     # Print the generated text
     return res1["choices"][0]["text"]  # res is short for result
 
-oout = schem_summ()
-print(oout)
