@@ -19,6 +19,7 @@ def graph_output():
         return result
 
 out = graph_output()
+print(final_grem)
 print(out)
         
 
