@@ -22,7 +22,12 @@ def schem_summ():
     vertex_props = summary.get('Vertex properties by label', {}).get('airport', {}) # <type 'dict'>
     vertex_props_str = " ".join(vertex_props)
             
-    sample_queries = "Find the number of airports in this graph: g.V().has('code','DFW')\n Find the number of flights going out of the airport SFO: g.V().hasLabel('airport').count()\n Get all cities with flights that are >4000 miles: g.V().has('code','SFO').outE().count()\n Find all the airports in the USA you can fly to from London Heathrow (LHR): g.V().has('dist', P.gt(4000L)).inV().values('city').dedup()\n g.V().has('code','LHR').out('route').has('country','US').values('code')\n Find all the unique locations in the world and in the US that I can get to from SFO through a 2 hop flight: g.V().has('code', 'SFO').out().out().dedup().fold().project('totalAirportCountFromSFO', 'USAirportCountFromSFO').by(__.unfold().count()).by(__.unfold().has('country', 'US').count())"
+    sample_queries = '''How many airports are there in this grap? : g.V().hasLabel('airport').count()\n 
+    How many flights are flying out of SFO? : g.V().has('code','SFO').outE().count()\n 
+    Find me all cities with flights that are greater than 4000 miles: g.V().has('dist', P.gt(4000L)).inV().values('city').dedup()\n 
+    Find all the airports in the USA you can fly to from London Heathrow airport (LHR): g.V().has('code','LHR').out('route').has('country','US').values('code')\n 
+    Find all the unique locations in the world and in the US that I can get to from SFO through a 2 hop flight: g.V().has('code', 'SFO').out().out().dedup().fold().project('totalAirportCountFromSFO', 'USAirportCountFromSFO').by(__.unfold().count()).by(__.unfold().has('country', 'US').count())"
+    '''
     schema_context = '''\
                 Here are some example questions and Gremlin queries that traverse a graph to find their answers: {sample_queries}.
                 
@@ -55,7 +60,7 @@ def schem_summ():
         }
 
     # Specify the prompt
-    print("\nAsk me a question about air-routes!")
+    print("\nAsk me a question about air routes!")
     user_query = input()
     prompt = schema_context.format(edge_props=edge_props_str, vertex_props=vertex_props_str, sample_queries=sample_queries, question=user_query)
 

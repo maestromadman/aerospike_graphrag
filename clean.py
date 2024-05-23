@@ -32,14 +32,13 @@ def clean_grem():
     #return res2["choices"][0]["text"]  # res is short for result
     
     output = res2["choices"][0]["text"] 
-    start = output.find(".V")
+    start = output.find("g")
     end = output.rfind(")") + 1
     gremlin_query = output[start:end]
     return gremlin_query
 
-out = clean_grem()
-print(out)
-
+# output = clean_grem()
+# print(output)
 
 
 
