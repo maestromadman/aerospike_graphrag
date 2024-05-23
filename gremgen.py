@@ -1,6 +1,6 @@
 from gremlin_python.process.anonymous_traversal import traversal
 from gremlin_python.process.traversal import IO
-from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
+from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection                                                                                             
 
 def schem_summ():
     # Create GraphTraversalSource to remote server.                                                                                                
@@ -8,10 +8,12 @@ def schem_summ():
 
     # Sample queries with the air-routes data set. To use these queries, download
             # the data set and load it with the following:
-            # g.with_("evaluationTimeout", 24 * 60 * 60 * 1000).\
-            #   io("/opt/aerospike-graph/data/air-routes-latest.graphml").\
-            #   with_(IO.reader, IO.graphml).\
-            #   read().iterate()                                                                                              
+    # g.with_("evaluationTimeout", 24 * 60 * 60 * 1000).\
+    # io("/opt/air-routes/air-routes-latest.graphml").\
+    # with_(IO.reader, IO.graphml).\
+    # read().iterate()                                                                                            
+
+# RAG
 
     summary = g.call("summary").next()
 
@@ -22,7 +24,7 @@ def schem_summ():
     vertex_props = summary.get('Vertex properties by label', {}).get('airport', {}) # <type 'dict'>
     vertex_props_str = " ".join(vertex_props)
             
-    sample_queries = '''How many airports are there in this grap? : g.V().hasLabel('airport').count()\n 
+    sample_queries = '''How many airports are there in this graph? : g.V().hasLabel('airport').count()\n 
     How many flights are flying out of SFO? : g.V().has('code','SFO').outE().count()\n 
     Find me all cities with flights that are greater than 4000 miles: g.V().has('dist', P.gt(4000L)).inV().values('city').dedup()\n 
     Find all the airports in the USA you can fly to from London Heathrow airport (LHR): g.V().has('code','LHR').out('route').has('country','US').values('code')\n 
