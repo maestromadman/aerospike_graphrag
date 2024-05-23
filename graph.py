@@ -5,7 +5,7 @@ from gremlin_python.driver.client import Client
 from clean import clean_grem
 
 final_grem = clean_grem()
-print(final_grem)
+# print(final_grem)
 
 def graph_output():
     
