@@ -1,10 +1,13 @@
 from gremlin_python.process.anonymous_traversal import traversal
 from gremlin_python.process.traversal import IO
 from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection                                                                                             
+from gremlin_python.driver.aiohttp.transport import AiohttpTransport
 
-def schem_summ():
-    # Create GraphTraversalSource to remote server.                                                                                                
-    g = traversal().with_remote(DriverRemoteConnection('ws://localhost:8182/gremlin', 'g'))
+def schem_summ(q):
+    # Create GraphTraversalSource to remote server.     
+    connection = DriverRemoteConnection('ws://localhost:8182/gremlin', 'g', transport_factory=lambda:AiohttpTransport(call_from_event_loop=True))                                                                                       
+    g = traversal().with_remote(connection)
+
 
     # Sample queries with the air-routes data set. To use these queries, download
             # the data set and load it with the following:
@@ -62,9 +65,9 @@ def schem_summ():
         }
 
     # Specify the prompt
-    print("\nAsk me a question about air routes!")
-    user_query = input()
-    prompt = schema_context.format(edge_props=edge_props_str, vertex_props=vertex_props_str, sample_queries=sample_queries, question=user_query)
+    # print("\nAsk me a question about air routes!")
+    # user_query = input()
+    prompt = schema_context.format(edge_props=edge_props_str, vertex_props=vertex_props_str, sample_queries=sample_queries, question=q)
 
     # Generate the text
     res1 = llm(prompt, **generation_kwargs)  # Res is a dictionary

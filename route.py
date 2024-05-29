@@ -13,13 +13,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# HTTP request; how you communicate with path
-# @app.get("/")
-# async def root():
-#     return {"message": "Hello World"}
 
 @app.get("/")
-async def from_clean():
-    result = clean_grem()
+async def from_clean(q: str):
+    print(q)
+    result = clean_grem(q)
     logging.info(f"clean_grem result: {result}")
-    return result
+    return result 
+

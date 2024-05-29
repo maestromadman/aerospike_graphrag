@@ -1,7 +1,7 @@
 from gremgen import schem_summ
 
-def clean_grem():
-    initial = schem_summ()
+def clean_grem(q):
+    initial = schem_summ(q)
 
     from llama_cpp import Llama
     model_path = "./mistral-7b-instruct-v0.1.Q5_K_S.gguf"
