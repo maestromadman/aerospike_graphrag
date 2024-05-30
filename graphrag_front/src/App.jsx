@@ -3,23 +3,22 @@
 // import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const name = 'Pablo Escobar';
+const Person = () => {
   return (
     <>
-      <div className= "App">
-        <h1> Hello, {2 + 2}!</h1>
-        {name ? (
-          <> 
-            test
-          </>
-        ) : (
-          <>
-          <h1>test</h1>
-          <h2>There is no name</h2>
-          </>
-        )}
+    <h1> Name: Pablo</h1>
+    <h2> Last Name: Escobar</h2>
+    <h2> Age: 30</h2>
+    </>
+  )
+}
 
+function App() {
+  return (
+    <> 
+      <div className= "App">  
+        <Person />
+     
       </div>
     </>
   )
