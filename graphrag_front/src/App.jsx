@@ -3,10 +3,10 @@
 // import viteLogo from '/vite.svg'
 import './App.css'
 
-const Person = () => {
+const Person = ({props}) => {
   return (
     <>
-    <h1> Name: Pablo</h1>
+    <h1> Name: Pablo </h1>
     <h2> Last Name: Escobar</h2>
     <h2> Age: 30</h2>
     </>
@@ -18,6 +18,7 @@ function App() {
     <> 
       <div className= "App">  
         <Person />
+       
      
       </div>
     </>
