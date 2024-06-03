@@ -8,9 +8,10 @@ const App = () => {
 
   const [counter, setCounter] = useState(0);
 
+  // [] represents "dependencies" that dictate if the effect should be run again
   useEffect(() => {
-    setCounter(100);
-  }, []);
+    alert("You've changed the counter to " + counter)
+  }, [counter]);
 
   return (
     <> 
